@@ -46,12 +46,12 @@ function isAllowed ( d, l, x, y, p ) {
             case 0:
                 if ( gameBoard[p][x][y+i] != '--') {
                     result = false
-                }                
+                }
                 break
             case 1:
                 if ( gameBoard[p][x+i][y] != '--') {
                     result = false
-                }                
+                }
                 break
         }
     }
@@ -98,11 +98,36 @@ function initShip ( length, player ) {
     }
 }
 
+function initGrid( b ) {
+    const boardName = b.dataset.boardName
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            let cellDiv = document.createElement('div')
+            cellDiv.classList = 'cell'
+            cellDiv.dataset.row = i
+            cellDiv.dataset.col = j
+
+            if (boardName == 'human') {
+                if ( gameBoard[boardName][i][j].charAt(0) == 'S') {
+                    cellDiv.classList += ' ship'
+                    //cellDiv.innerHTML = gameBoard[boardName][i][j]
+                }
+        }
+            b.append(cellDiv)
+        }
+    }
+}
+
+const humanBoardDiv = document.querySelector('#human-board')
+const machineBoardDiv = document.querySelector('#machine-board')
+initGrid(humanBoardDiv)
+initGrid(machineBoardDiv)
+
 for ( let len = 4; len > 0; len-- ) {
     for ( let i = 1; i <= 5-len; i++ ) {
         initShip(len, 'human')
         initShip(len, 'machine')
-   }    
+   }
 }
 
 console.log(gameBoard)
