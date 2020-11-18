@@ -120,8 +120,7 @@ function initGrid( b ) {
 
 const humanBoardDiv = document.querySelector('#human-board')
 const machineBoardDiv = document.querySelector('#machine-board')
-initGrid(humanBoardDiv)
-initGrid(machineBoardDiv)
+
 
 for ( let len = 4; len > 0; len-- ) {
     for ( let i = 1; i <= 5-len; i++ ) {
@@ -129,5 +128,15 @@ for ( let len = 4; len > 0; len-- ) {
         initShip(len, 'machine')
    }
 }
+
+initGrid(humanBoardDiv)
+initGrid(machineBoardDiv)
+
+const allCellDivs = document.querySelector('#machine-board #.cell')
+
+cellDivs.addEventListener('click', event =>{
+    
+    const selecterCell = event.CurrentTarget
+})
 
 console.log(gameBoard)
