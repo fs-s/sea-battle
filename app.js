@@ -1,3 +1,4 @@
+
 let gameBoard = {
     'human': [
         ['--', '--', '--', '--', '--', '--', '--', '--', '--', '--'],
@@ -100,19 +101,20 @@ function initShip ( length, player ) {
 
 function initGrid( b ) {
     const boardName = b.dataset.boardName
-    for (let i = 0; i < 10; i++) {
-        for (let j = 0; j < 10; j++) {
+    for ( let i = 0; i < 10; i++ ) {
+        for ( let j = 0; j < 10; j++ ) {
             let cellDiv = document.createElement('div')
             cellDiv.classList = 'cell'
             cellDiv.dataset.row = i
             cellDiv.dataset.col = j
 
-            if (boardName == 'human') {
-                if ( gameBoard[boardName][i][j].charAt(0) == 'S') {
+            if ( boardName == 'human' ) {
+                if ( gameBoard[boardName][i][j].charAt(0) == 's' ) {
                     cellDiv.classList += ' ship'
-                    //cellDiv.innerHTML = gameBoard[boardName][i][j]
+                    // cellDiv.innerHTML = gameBoard[boardName][i][j]
                 }
-        }
+            }
+
             b.append(cellDiv)
         }
     }
@@ -120,7 +122,6 @@ function initGrid( b ) {
 
 const humanBoardDiv = document.querySelector('#human-board')
 const machineBoardDiv = document.querySelector('#machine-board')
-
 
 for ( let len = 4; len > 0; len-- ) {
     for ( let i = 1; i <= 5-len; i++ ) {
@@ -132,11 +133,18 @@ for ( let len = 4; len > 0; len-- ) {
 initGrid(humanBoardDiv)
 initGrid(machineBoardDiv)
 
-const allCellDivs = document.querySelector('#machine-board #.cell')
+const cellDivs = document.querySelectorAll('#machine-board .cell')
 
-cellDivs.addEventListener('click', event =>{
-    
-    const selecterCell = event.CurrentTarget
+cellDivs.forEach(el => {
+    el.addEventListener('click', event => {
+        const selectedCell = event.currentTarget
+        const selectedRow = selectedCell.dataset.row
+        const selectedCol = selectedCell.dataset.col
+
+        console.log(gameBoard['machine'][selectedRow][selectedCol])
+    })
 })
+
+
 
 console.log(gameBoard)
